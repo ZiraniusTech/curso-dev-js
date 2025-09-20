@@ -85,8 +85,27 @@
             const pesoKg = document.querySelector("#peso").value;
             const userAltura = document.querySelector("#altura").value;            
             const calculoImc = pesoKg / (userAltura * userAltura) ;
-            document.querySelector("#resultado_imc").textContent = calculoImc.toFixed(2);
-        })
+                let imc;                    
+            if (calculoImc < 18.5){
+                let imc = "abaixo do peso normal";
+            }   else if (calculoImc >= 18.5 && calculoImc < 24.9){
+                let imc = "Peso Normal";
+            }   else if (calculoImc >= 24.9 && calculoImc < 29.9){
+                let imc ="Excesso de peso";     
+            }   else if (calculoImc >= 29.9 && calculoImc < 30.0){
+                let imc = "Obesidade classe I";
+            }   else if (calculoImc >= 30.0 && calculoImc < 40.0){
+                let imc = "Obesidade classe II";
+            }   else if (calculoImc >= 40.0){
+                let imc = "Obesidade classe III";
+            }   else {
+                imc = "Valor inválido ou não classificado";     
+            }
+            console.log("Seu IMC te classifica como: " + imc);
+            
+            document.querySelector("#resultado_imc").textContent = ` o seu imc é ${calculoImc.toFixed(2)} e a classificação e ${imc}`;
+            
+        });
 
 
     </script>
