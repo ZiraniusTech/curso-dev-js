@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Aperte F12 para exibir</p>;
+
+    <script>
+
+        //Array
+
+        const playlist = ["Faroeste Caboclo", "Sweet child O'Mine", "Welcone to Jungle"]
+        console.log(playlist);
+
+        // musica ao final
+
+        playlist.push("Aluga-se");
+        console.log(playlist);
+
+        //excluir ultimo adicionado
+
+        playlist.pop();
+        console.log(playlist);
+
+        //tamanho da plylist
+
+        console.log(playlist.length);
+
+
+        // Objetos
+
+        const filme  = {
+            titulo : "STAR WARS - UMA NOVA ESPERANÇA",
+            ano : 1977,
+            diretor : "George Lucas"
+        }
+
+        console.log(filme);
+
+        //adicionando 3 atores
+        filme.atores = ["Mark Hamill", "Harrison Ford", "Carrie Fisher"];
+        console.log(filme);
+
+        // personagem
+
+        filme.personagem = ["Chewbaaka"];
+        console.log(filme.personagem[0]);
+
+        console.log(filme);
+
+        console.log(filme.titulo, filme.atores, filme.personagem[0]);
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
