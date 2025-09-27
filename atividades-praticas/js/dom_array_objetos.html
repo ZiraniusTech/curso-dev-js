@@ -73,6 +73,9 @@
             if (nome && idade && curso){
                 alunos.push({nome, idade, curso});
                 alert("Aluno cadastrado com Sucesso");
+                cancelar();
+                idAtual = alunos.length -1;
+                renderizarAluno();
             } else{
                 alert("Preencha todos os campos");
             }
@@ -89,6 +92,48 @@
         btnCancelar.addEventListener('click',cancelar);
 
 
+        const nome = document.querySelector("#aluno-nome");
+        const idade = document.querySelector("#aluno-idade");        
+        const curso = document.querySelector("#aluno-curso");
+        const btnAnterior = document.querySelector("#btn-anterior");
+        const btnProximo = document.querySelector("#btn-proximo");
+
+        let idAtual = 0;
+
+        function renderizarAluno(){
+
+            if (alunos.length > 0){
+
+                    nome.textContent = alunos[idAtual].nome;
+                    idade.textContent = alunos[idAtual].idade;
+                    curso.textContent = alunos[idAtual].curso;
+                    document.querySelector(".ficha-alunos").classList.remove("d-none");
+
+            }
+
+        }
+
+        function proximo(){
+            idAtual++;
+
+            if(idAtual >= alunos.length){
+                idAtual = 0;
+            }
+            renderizarAluno();
+        }
+
+        function anterior(){
+            idAtual--;
+
+            if(idAtual < 0){
+                idAtual = alunos.length -1;
+
+            }
+            renderizarAluno();
+        }
+
+        btnProximo.addEventListener('click', proximo);
+        btnAnterior.addEventListener('click', anterior);
 
     </script>
 </body>
