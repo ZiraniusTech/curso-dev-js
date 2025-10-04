@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funções</title>
+</head>
+<body>
+    
+    <p>f12</p>
+
+    <script>
+        //função nomeada sem parametros
+
+    function exercicio(){
+        //cod...
+    }  
+    
+    function saudacao(){
+        console.log("ola mundo!");
+    }
+    saudacao();
+
+
+    //funcao com parametro
+
+    function soma (n1,n2){
+        console.log(n1+n2);
+    }
+    soma(3,5);
+    soma(5,6);
+
+    function somaRetorno (n1,n2){
+        return n1 + n2;
+    }    
+
+    const resultado = somaRetorno(4,2); // 4+2 = 6
+    console.log(resultado);
+
+    // função anonima
+
+    const subtrair = function(n1,n2){
+        return n1 - n2;
+    }
+    console.log(subtrair(4,2));
+
+    //funcao anonima => arrow function
+
+    const multiplicar = (n1,n2) => {
+        return n1 * n2; // return explicito
+    }
+
+    console.log(multiplicar(3,3));
+
+    const dividir = (n1,n2) => n1/n2; // return implicito
+    console.log(dividir(2,2));
+
+    //fncao com parametro padrao / opicional
+    function cumprimentar(nome="Visitante"){
+        console.log(`Olá, ${nome}`);
+    }
+    cumprimentar();
+    cumprimentar("Cesar");
+
+    // função callback
+
+    function calcular(n1,n2,operacao){
+        return operacao(n1,n2);
+    }
+
+    console.log(calcular(2,2,somaRetorno));
+    console.log(calcular(3,2,multiplicar));
+
+    //função assincroma
+
+    async function buscarDadosFeriados(){
+        const resposta = await fetch("https://brasilapi.com.br/api/feriados/v1/2026");
+        const dados = await resposta .json();
+        console.log(dados);
+    }
+    buscarDadosFeriados();
+
+    //exercicio 1
+        const calcularArea = (largura,altura) => {
+        return largura * altura; // return explicito
+    }
+
+    console.log(calcularArea(12.5,15.0));
+
+
+
+    //exercicio 2
+    function ehpar(numero){
+        return numero % 2 === 0;
+    }
+    console.log(ehpar(4));    // true (4 é par)
+    console.log(ehpar(7));    // false (7 é ímpar)
+    console.log(ehpar(0));    // true (0 é par)
+    console.log(ehpar(-2));   // true (-2 é par)
+    console.log(ehpar(-3));   // false (-3 é ímpar)
+
+    //exercico 3
+
+    const CelsiusPF = (temCel) => {
+        const tempConv = (temCel * 9/5) + 32;
+        return tempConv.toFixed(1);
+    }
+    console.log(CelsiusPF(34));
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+</body>
+</html>
