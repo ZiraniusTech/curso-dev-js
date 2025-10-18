@@ -8,6 +8,9 @@ const telaCadastro = document.querySelector("#tela-cadastro");
 //Botões
 const btnAdicionar = document.querySelector("#btn-adicionar");
 const btnVoltarLista = document.querySelector("#btn-voltar-lista");
+const btnDownload = document.querySelector("#btn-download");
+const btnUpload = document.querySelector("#btn-upload");
+const inputUpload = document.querySelector("#input-upload");
 
 //Inputs
 const inputId = document.querySelector("#user-id");
@@ -29,6 +32,8 @@ const tabelaCorpo = document.querySelector("#user-table-body");
 let idEmEdicao = null;
 
 const btnCep = document.querySelector("#btn-buscar-cep")
+
+const inputBusca = document.querySelector("#user-busca");
 
 function mostrarTelaLista(){
     telaLista.classList.remove("d-none");
@@ -81,9 +86,9 @@ function salvarNoStorage(){
     localStorage.setItem("cadastro_usuarios",JSON.stringify(usuarios));
 }
 
-function renderizarTabela(){
+function renderizarTabela(usuariosFiltrados = usuarios){
     tabelaCorpo.innerHTML = "";
-    usuarios.forEach(user => {
+    usuariosFiltrados.forEach(user => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${user.nome}</td>
@@ -160,6 +165,40 @@ async function buscarCep(){
 
 }
 
+function buscarUsuario(){
+    const conteudo = inputBusca.value.toLowerCase().trim();
+
+    if (!conteudo){
+        renderizarTabela()
+        return;
+    }
+    const usuariosFiltrados = usuarios.filter(user => {
+        return user.nome.toLowerCase().trim().includes(conteudo) || user.sobrenome.toLowerCase().trim().includes(conteudo) || user.email.toLowerCase().trim().includes(conteudo);
+    })
+
+    renderizarTabela(usuariosFiltrados)
+}
+
+    function downloadArquivo(){
+
+        const dados = JSON.stringify(usuarios);
+        const arquivo = new Blob([dados], {type: "application/json"});
+        const url = URL.createObjectURL(arquivo);
+        const linkDownload = document.createElement("a");
+        linkDownload.href = url;
+        linkDownload.download = "usuarios,json";
+        linkDownload.click();
+        URL.revokeObjectURL(url);
+    }
+
+    function uploadArquivo(){
+
+
+    }
+
+
+
+
 function inicializar(){
     btnAdicionar.addEventListener("click",mostrarTelaCadastro);
     btnVoltarLista.addEventListener("click",mostrarTelaLista);
@@ -167,6 +206,12 @@ function inicializar(){
 
     form.addEventListener("submit", salvarUsuario);
     mostrarTelaLista();
+
+    inputBusca.addEventListener("input", buscarUsuario);
+
+    btnDownload.addEventListener("click", downloadArquivo);
+    btnUpload.addEventListener("click", () => inputUpload.click());
+    inputUpload.addEventListener.apply("change", uploadArquivo);
 
     tabelaCorpo.addEventListener("click", (event) => {
         const target = event.target.closest("button");
