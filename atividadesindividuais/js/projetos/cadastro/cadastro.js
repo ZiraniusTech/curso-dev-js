@@ -35,6 +35,21 @@ const btnCep = document.querySelector("#btn-buscar-cep")
 
 const inputBusca = document.querySelector("#user-busca");
 
+//modal
+
+const modalDetalhes = document.querySelector("#detalhes-modal");
+const modalNome = document.querySelector("#modal-nome");
+const modalEmail = document.querySelector("#modal-email");
+const modalEndereco = document.querySelector("#modal-endereco-completo");
+const modalObs = document.querySelector("#modal-obs");
+const modalBtnEditar = document.querySelector("#modal-btn-editar");
+const modalBtnExcluir = document.querySelector("#modal-btn-excluir");
+
+const modal = new bootstrap.Modal(modalDetalhes);
+
+//falta codigo.
+
+
 function mostrarTelaLista(){
     telaLista.classList.remove("d-none");
     telaCadastro.classList.add("d-none");
@@ -98,7 +113,10 @@ function renderizarTabela(usuariosFiltrados = usuarios){
                 <button type="button" class="btn btn-sm btn-warning" data-id="${user.id}">Editar</button>
 
                 <button type="button" class="btn btn-sm btn-danger" data-id="${user.id}">Excluir</button>
+
+                <button type="button" class="btn btn-sm btn-primary" data-id="${user.id}">Consultar</button>
             </td>
+            
         `;
 
         tabelaCorpo.appendChild(tr);
@@ -191,13 +209,60 @@ function buscarUsuario(){
         URL.revokeObjectURL(url);
     }
 
-    function uploadArquivo(){
+    function uploadArquivo(event){
+        const arquivo = event.target.files[0];
+        if (!arquivo) return;
+        const leitor = new FileReader();
 
+        leitor.onload = function(e){
+
+            const conteudoArquivo = e.target.result;
+
+            const usuariosImportados = JSON.parse(conteudoArquivo);
+
+            if (!Array.isArray(usuariosImportados)){
+
+            alert("Arquivo não é um Array valido!");
+            return;
+
+            }
+
+            if (confirm("Deseja realmente substituir as informações dos usiarios?")){
+
+                usuarios = usuariosImportados;
+                salvarNoStorage();
+                renderizarTabela();
+                alert("Usuarios importados com sucesso!");
+                inputUpload.value = "";
+                // location.reload(true);
+            }
+
+        }
+
+        leitor.readAsText(arquivo);
 
     }
 
+        
+function mostrarDetalhesUsuario(id){
+
+    const user = usuarios.find(u => u.id === id);
+    if (!user) return;
+
+    modalNome.textContent = `${user.nome} ${user.sobrenome}`;
+    modalEmail.textContent = user.email;
+    const endereco = [user.rua, user.numero, user.complemento, user.bairro, user.cidade, user.cidade, user.estado, user.cep].filter(Boolean).join(", ");
+
+    modalEndereco.textContent = endereco;
+    modalObs.textContent = user.obs;
+
+    modalBtnEditar.dataset.id = user.id;
+    modalBtnExcluir.dataset.id = user.id;
+
+    modal.show();
 
 
+}
 
 function inicializar(){
     btnAdicionar.addEventListener("click",mostrarTelaCadastro);
@@ -211,7 +276,7 @@ function inicializar(){
 
     btnDownload.addEventListener("click", downloadArquivo);
     btnUpload.addEventListener("click", () => inputUpload.click());
-    inputUpload.addEventListener.apply("change", uploadArquivo);
+    inputUpload.addEventListener("change", uploadArquivo);
 
     tabelaCorpo.addEventListener("click", (event) => {
         const target = event.target.closest("button");
@@ -225,7 +290,26 @@ function inicializar(){
             editarUsuario(id);
         } else if (target.classList.contains("btn-danger")){
             excluirUsuario(id);
+        } else if (target.classList.contains("btn-primary")){
+            mostrarDetalhesUsuario(id);
         }        
+    })
+    
+    modalDetalhes.addEventListener("click", (event) => {
+        const target = event.target.closest("button");
+        if(!target) return
+        
+        const id = Number(target.dataset.id);
+        
+        if (isNaN(id)) return
+
+        if (target.classList.contains("btn-warning")){
+            modal.hide();
+            editarUsuario(id);
+        } else if (target.classList.contains("btn-danger")){
+            modal.hide();
+            excluirUsuario(id);
+        } 
     })
 }
 
