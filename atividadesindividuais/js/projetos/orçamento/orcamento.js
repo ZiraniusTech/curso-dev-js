@@ -1,4 +1,4 @@
-document.querySelector('.seu-nome').textContent = "Lucas Torquato";
+document.querySelector('.seu-nome').textContent = "Cesar Vieira";
 
 const PRECO_POR_PAGINA = 500;
 const PRECO_DESIGN_ADICIONAL = 1000;
