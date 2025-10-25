@@ -1,13 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    
+    <title>Projetos Senai JavaScript</title>
+
+    <style>
+        /* Documentação do CSS */
+
+        /* 1. Estilo "Dark Mode" para a página inteira */
+        body {
+            /* Fundo escuro */
+            background-color: #2c2c2c; 
+            /* Cor do texto principal (claro) */
+            color: #f0f0f0; 
+            /* Fonte mais limpa */
+            font-family: Arial, sans-serif; 
+            
+            /* Centraliza todo o conteúdo na página */
+            display: flex;
+            flex-direction: column; /* Organiza os itens em coluna */
+            align-items: center;    /* Alinha horizontalmente ao centro */
+            justify-content: center; /* Alinha verticalmente ao centro */
+            height: 100vh; /* Ocupa 100% da altura da janela */
+            margin: 0; /* Remove margens padrão */
+        }
+
+        /* 2. Estilo do Título Principal */
+        h1 {
+            color: #ffffff; /* Cor branca para o título */
+            border-bottom: 2px solid #55aaff; /* Linha azul por baixo */
+            padding-bottom: 10px;
+        }
+
+        /* 3. Estilo dos Botões */
+        .btn-projeto {
+            /* Espaçamento interno (para o botão ficar "gordinho") */
+            padding: 15px 30px; 
+            /* Margem entre os botões */
+            margin: 12px; 
+            
+            /* Cor de fundo do botão */
+            background-color: #4a4a4a; 
+            /* Cor do texto do botão */
+            color: #ffffff; 
+            
+            /* Borda (como pediste) */
+            border: 2px solid #666666; 
+            border-radius: 8px; /* Arredonda os cantos */
+            
+            /* Sombra (como pediste) */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
+            
+            /* Fonte */
+            font-size: 18px;
+            font-weight: bold;
+            
+            /* Muda o cursor para "mãozinha" */
+            cursor: pointer; 
+            
+            /* Animação suave para o efeito "hover" */
+            transition: all 0.3s ease; 
+        }
+
+        /* 4. Efeito de Brilho ao passar o rato (Hover) */
+        .btn-projeto:hover {
+            /* Aumenta o brilho do botão */
+            filter: brightness(1.2); 
+            
+            /* (Efeito de brilho/sombra "glow") */
+            /* Sombra mais clara e expandida para dar o efeito de brilho */
+            box-shadow: 0 0 20px rgba(85, 170, 255, 0.7); 
+            
+            /* Muda a cor da borda ao passar o rato */
+            border-color: #55aaff; 
+        }
+
+    </style>
 </head>
 <body>
-    <a href="atividadesindividuais/js/projetos/cadastro/cadastro.html">Cadastro</a>
-    <br>
-    <a href="atividadesindividuais/js/projetos/orçamento/atividade_orcamento.html">Orçamento</a>
+
+    <h1>Projetos Senai JavaScript</h1>
+
+    <button class="btn-projeto" onclick="location.href='atividadesindividuais/js/projetos/cadastro/cadastro.html'">
+        Cadastro
+    </button>
+
+    <button class="btn-projeto" onclick="location.href='atividadesindividuais/js/projetos/orçamento/atividade_orcamento.html'">
+        Orçamento
+    </button>
+
 </body>
 </html>
